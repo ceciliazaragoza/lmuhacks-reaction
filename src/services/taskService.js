@@ -46,4 +46,3 @@ export async function fetchTasks(category) {
 export async function deleteTasks(docID) {
   await deleteDoc(doc(db, "articles", docID));
 }
-
