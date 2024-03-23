@@ -1,6 +1,6 @@
 // Thank you to Video SDK youtube channel for the help!
 //This is the Auth token, you will use it to generate a meeting and connect to it
-const API_BASE_URL = "https://api.videosdk.live";
+// const API_BASE_URL = "https://api.videosdk.live";
 const VIDEOSDK_TOKEN = process.env.REACT_APP_VIDEOSDK_TOKEN;
 const API_AUTH_URL = process.env.REACT_APP_AUTH_URL;
 // API call to create a meeting
@@ -23,11 +23,11 @@ export const getToken = async () => {
 };
 
 export const createMeeting = async ({ token }) => {
-  const url = `${API_BASE_URL}/v2/rooms`;
-  const res = await fetch(url, {
+  // const url = `${API_BASE_URL}/v2/rooms`;
+  const res = await fetch(`https://api.videosdk.live/v2/rooms`, {
     method: "POST",
     headers: {
-      authorization: `${authToken}`,
+      authorization: `${VIDEOSDK_TOKEN}`,
       "Content-Type": "application/json",
     },
     body: JSON.stringify({}),
