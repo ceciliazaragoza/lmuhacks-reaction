@@ -42,13 +42,6 @@ function JoinScreen(props) {
 const VideoCall = () => {
   const [meetingId, setVidCallMeetingId] = useState(null)
 
-  //Getting the meeting id by calling the api we just wrote
-  // const getMeetingAndToken = async (id) => {
-  //   const meetingId =
-  //     id == null ? await createMeeting({ token: VIDEOSDK_TOKEN }) : id;
-  //   setMeetingId(meetingId);
-  // };
-
   //This will set Meeting Id to null when meeting is left or ended
   const onMeetingLeave = () => {
     setVidCallMeetingId(null)
@@ -65,27 +58,10 @@ const VideoCall = () => {
       token={VIDEOSDK_TOKEN}
     >
       <MeetingView meetingId={meetingId} onMeetingLeave={onMeetingLeave} />
-      <Controls />
     </MeetingProvider>
   ) : (
     <JoinScreen getMeetingAndToken={setVidCallMeetingId} />
   )
-
-  // return (
-
-  // TODO: this meetingProvider below works!
-  // <MeetingProvider
-  //   config={{
-  //     meetingId: "qx9y-aczv-qqla",
-  //     micEnabled: true,
-  //     webcamEnabled: true,
-  //     name: "Cecilia's Org",
-  //   }}
-  //   token="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhcGlrZXkiOiI2ZTQzMThiYi1hZTBlLTQxNWMtOThhMi1lMzI0NTlkMjY3MWQiLCJwZXJtaXNzaW9ucyI6WyJhbGxvd19qb2luIl0sImlhdCI6MTcxMTIxNzE4MCwiZXhwIjoxNzExMzAzNTgwfQ.xFHtZhXKAg8_YI9eUKjm8hjxdiwUGdbBspAhbsitR0k"
-  // >
-  //   <MeetingView />
-  // </MeetingProvider>
-  // );
 }
 
 export default VideoCall
