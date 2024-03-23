@@ -1,6 +1,8 @@
 import logo from "./logo.svg";
 import "./App.css";
 import { SignIn, SignOut, useAuthentication } from '../services/authService'
+import Clock from './Clock';
+
 
 function App() {
   return (
