@@ -1,8 +1,10 @@
-import logo from './logo.svg'
 import './App.css'
 import { SignIn, SignOut, useAuthentication } from './services/authService.js'
 import React, { useEffect, useMemo, useRef, useState } from 'react'
-// import Timer from "timer.js";
+import ReactDOM from 'react-dom'
+import Timer from './components/timer'
+import AnalogClock from './components/AnalogClock'
+import './components/clock.css'
 
 function App() {
   const user = useAuthentication()
@@ -14,10 +16,11 @@ function App() {
     // Whenever the user signs in or out, hide the sign-out button by default
     setShowSignOut(false)
   }, [user])
-  
+
   return (
     <div className="App">
       <header className="App-header">
+        <Timer />
         <div className="auth-container">
           {!user ? (
             <SignIn />
@@ -32,8 +35,14 @@ function App() {
           )}
         </div>
       </header>
+      <div className="clock-container">
+        <AnalogClock /> {/* AnalogClock component */}
+      </div>
     </div>
   )
 }
+
+const rootElement = document.getElementById('root')
+ReactDOM.render(<App />, rootElement)
 
 export default App
