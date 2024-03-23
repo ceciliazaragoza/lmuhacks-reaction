@@ -1,48 +1,56 @@
-import { db } from "../firebaseConfig";
-import {
-  collection,
-  query,
-  getDocs,
-  addDoc,
-  orderBy,
-  limit,
-  Timestamp,
-  deleteDoc,
-  doc,
-  where,
-} from "firebase/firestore";
+import { collection, addDoc, query, orderBy, Timestamp, deleteDoc, doc, where, getDocs, updateDoc } from 'firebase/firestore';
+import { db } from '../firebaseConfig';
 
-export async function createTask({ title, body }) {
-  const data = { title, body, date: Timestamp.now() };
-  const docRef = await addDoc(collection(db, "articles"), data);
+export const createTask = async ({ task, author, completed }) => {
+  const data = { 
+    task, 
+    author, 
+    completed, 
+    createdAt: Timestamp.now() 
+  };
+  const docRef = await addDoc(collection(db, "tasks"), data);
   return { id: docRef.id, ...data };
-}
+};
 
-const PAGE_SIZE = 20;
-
-export async function fetchTasks(category) {
-  const snapshot = category
-    ? await getDocs(
-        query(
-          collection(db, "articles"),
-          where("category", "==", category),
-          limit(PAGE_SIZE)
-        )
-      )
-    : await getDocs(
-        query(
-          collection(db, "articles"),
-          orderBy("date", "desc"),
-          limit(PAGE_SIZE)
-        )
-      );
+export const fetchTasks = async (userId) => {
+  const snapshot = await getDocs(
+    query(
+      collection(db, "tasks"),
+      where("author", "==", userId),
+      orderBy("createdAt", "desc")
+    )
+  );
 
   return snapshot.docs.map((doc) => ({
     id: doc.id,
     ...doc.data(),
   }));
+};
+
+export const deleteTask = async (taskId) => {
+  await deleteDoc(doc(db, "tasks", taskId));
+};
+
+export async function updateTaskCompleteness(taskId, completed) {
+  try {
+    const taskRef = doc(db, 'tasks', taskId);
+    await updateDoc(taskRef, {
+      completed: completed
+    });
+    console.log('Task completeness updated successfully!');
+  } catch (error) {
+    console.error('Error updating task completeness:', error);
+  }
 }
 
-export async function deleteTasks(docID) {
-  await deleteDoc(doc(db, "articles", docID));
+export async function updateTaskDetail(taskId, newTaskDetail) {
+  try {
+    const taskRef = doc(db, 'tasks', taskId);
+    await updateDoc(taskRef, {
+      task: newTaskDetail
+    });
+    console.log('Task detail updated successfully!');
+  } catch (error) {
+    console.error('Error updating task detail:', error);
+  }
 }
