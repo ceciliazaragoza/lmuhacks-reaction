@@ -87,7 +87,6 @@ function App() {
       </header>
       <div className={`clock-container ${isClockMinimized ? 'minimized-clock' : ''}`}>
         <AnalogClock /> 
-        <VideoCall />
       </div>
       <div>
         {!user ? (
@@ -112,6 +111,7 @@ function App() {
           </div>
         )}
       </div>
+      <VideoCall />
     </div>
   )
 }
