@@ -8,7 +8,9 @@ import Controls from './Controls'
 // TODO: replace token with video token when add more members
 const VIDEOSDK_TOKEN = process.env.REACT_APP_VIDEOSDK_TOKEN
 
-function JoinScreen({ setVidCallMeetingId }) {
+function JoinScreen(props) {
+  const { getMeetingAndToken: setVidCallMeetingId } = props
+
   const [meetingId, setMeetingId] = useState(null)
   const getMeetingAndToken = async id => {
     const meetingId = id == null ? await createMeeting({ token: VIDEOSDK_TOKEN }) : id
