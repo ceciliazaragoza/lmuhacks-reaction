@@ -10,6 +10,11 @@ function App() {
   const toggleSignOut = () => setShowSignOut(!showSignOut)
   const [showSignOut, setShowSignOut] = useState(false)
 
+  useEffect(() => {
+    // Whenever the user signs in or out, hide the sign-out button by default
+    setShowSignOut(false)
+  }, [user])
+  
   return (
     <div className="App">
       <header className="App-header">

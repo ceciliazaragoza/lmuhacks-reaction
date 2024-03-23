@@ -21,7 +21,7 @@
   align-items: flex-end;
   justify-content: flex-start;
   padding: 10px 20px;
-  font-size: calc(10px + 2vmin);
+  font-size: calc(5px + 2vmin);
   color: white;
   box-sizing: border-box;
 }
@@ -32,7 +32,6 @@
 }
 
 .greeting {
-  margin-right: 10px;
   color: white;
 }
 
@@ -47,7 +46,7 @@
   color: white;
   font-size: 20px;
   font-weight: bold;
-  margin-right: 5px;
+  margin-right: 10px;
   margin-left: 10px;
 }
 
