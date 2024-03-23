@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import { MeetingProvider } from '@videosdk.live/react-sdk'
 import MeetingView from './MeetingView'
 import JoinScreen from './JoinScreen.js'
+import './VideoCall.css'
 const VIDEOSDK_TOKEN = process.env.REACT_APP_VIDEOSDK_TOKEN
 
 // Thank you to VideoSDK docs!: https://docs.videosdk.live/react/guide/video-and-audio-calling-api-sdk/concept-and-architecture
