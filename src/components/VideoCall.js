@@ -1,43 +1,8 @@
-import React, { useEffect, useRef, useState } from 'react'
+import React, { useState } from 'react'
 import { MeetingProvider } from '@videosdk.live/react-sdk'
 import MeetingView from './MeetingView'
-import { createMeeting, getToken, validateMeeting } from '../apis/videoAPI.js'
-// import JoinScreen from "./JoinScreen.js";
-import Controls from './Controls'
-
-// TODO: replace token with video token when add more members
+import JoinScreen from './JoinScreen.js'
 const VIDEOSDK_TOKEN = process.env.REACT_APP_VIDEOSDK_TOKEN
-
-function JoinScreen(props) {
-  const { getMeetingAndToken: setVidCallMeetingId } = props
-
-  const [meetingId, setMeetingId] = useState(null)
-  const getMeetingAndToken = async id => {
-    const meetingId = id == null ? await createMeeting({ token: VIDEOSDK_TOKEN }) : id
-    setMeetingId(meetingId)
-    setVidCallMeetingId(meetingId)
-  }
-
-  const onClick = async () => {
-    await getMeetingAndToken(meetingId)
-    console.log('join meeting button clicked')
-  }
-
-  return (
-    <div>
-      <input
-        type="text"
-        placeholder="Enter Meeting Id"
-        onChange={e => {
-          setMeetingId(e.target.value)
-        }}
-      />
-      <button onClick={onClick}>Join</button>
-      {' or '}
-      <button onClick={onClick}>Create Meeting</button>
-    </div>
-  )
-}
 
 const VideoCall = () => {
   const [meetingId, setVidCallMeetingId] = useState(null)
@@ -48,19 +13,23 @@ const VideoCall = () => {
   }
 
   return VIDEOSDK_TOKEN && meetingId ? (
-    <MeetingProvider
-      config={{
-        meetingId,
-        micEnabled: true,
-        webcamEnabled: true,
-        name: 'C.V. Raman',
-      }}
-      token={VIDEOSDK_TOKEN}
-    >
-      <MeetingView meetingId={meetingId} onMeetingLeave={onMeetingLeave} />
-    </MeetingProvider>
+    <div className="videoCall">
+      <MeetingProvider
+        config={{
+          meetingId,
+          micEnabled: true,
+          webcamEnabled: true,
+          name: 'C.V. Raman'
+        }}
+        token={VIDEOSDK_TOKEN}
+      >
+        <MeetingView meetingId={meetingId} onMeetingLeave={onMeetingLeave} />
+      </MeetingProvider>
+    </div>
   ) : (
-    <JoinScreen getMeetingAndToken={setVidCallMeetingId} />
+    <div className="videoCall">
+      <JoinScreen getMeetingAndToken={setVidCallMeetingId} />
+    </div>
   )
 }
 

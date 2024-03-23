@@ -38,8 +38,8 @@ function App() {
       </header>
       <div className="clock-container">
         <AnalogClock /> {/* AnalogClock component */}
-        <VideoCall />
       </div>
+      <VideoCall />
     </div>
   )
 }
