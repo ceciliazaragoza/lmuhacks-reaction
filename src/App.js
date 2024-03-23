@@ -4,6 +4,7 @@ import React, { useEffect, useMemo, useRef, useState } from 'react'
 import ReactDOM from 'react-dom'
 import Timer from './components/timer'
 import AnalogClock from './components/AnalogClock'
+import VideoCall from './components/VideoCall.js'
 import './components/clock.css'
 
 function App() {
@@ -37,6 +38,7 @@ function App() {
       </header>
       <div className="clock-container">
         <AnalogClock /> {/* AnalogClock component */}
+        <VideoCall />
       </div>
     </div>
   )
