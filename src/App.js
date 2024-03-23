@@ -1,7 +1,6 @@
-import logo from "./logo.svg";
 import "./App.css";
 import { SignIn, SignOut, useAuthentication } from "./services/authService";
-import Timer from "./timer";
+import TaskList from  "./components/TaskList";
 
 function App() {
   const user = useAuthentication()
@@ -9,8 +8,9 @@ function App() {
   return (
     <div className="App">
       <header>
-        <span>pomodoro app</span> 
-        {!user ? <SignIn /> : <SignOut />}
+        {/* <span>pomodoro app</span>  */}
+        {/* {!user ? <SignIn /> : <SignOut />} */}
+        <TaskList />
       </header>
     </div>
   );
