@@ -1,19 +1,24 @@
-import logo from "./logo.svg";
 import "./App.css";
-import { SignIn, SignOut, useAuthentication } from "./services/authService";
-import Timer from "./timer";
+import React from "react";
+import ReactDOM from "react-dom";
+import Timer from "./components/timer";
+import AnalogClock from './components/AnalogClock';
+import "./components/clock.css";
 
 function App() {
-  const user = useAuthentication()
-
   return (
     <div className="App">
-      <header>
-        <span>pomodoro app</span> 
-        {!user ? <SignIn /> : <SignOut />}
+      <header className="App-header">
+        <Timer /> {/* Using Timer component */}
       </header>
+      <div className="clock-container">
+        <AnalogClock/> {/* AnalogClock component */}
+      </div>
     </div>
   );
 }
+
+const rootElement = document.getElementById("root");
+ReactDOM.render(<App />, rootElement);
 
 export default App;
