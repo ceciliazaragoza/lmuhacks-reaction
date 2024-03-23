@@ -1,5 +1,20 @@
-import React, { useEffect, useMemo, useRef, useState } from "react";
+// TaskList.js
+import React from 'react';
+import TaskItem from './TaskItem';
 
-export default function TaskList() {
-  return <h1> something </h1>;
+function TaskList({ tasks, onDelete, onUpdateTask }) {
+  return (
+    <ul>
+      {tasks.map(task => (
+        <TaskItem
+          key={task.id}
+          task={task}
+          onDelete={onDelete}
+          onUpdateTask={onUpdateTask}
+        />
+      ))}
+    </ul>
+  );
 }
+
+export default TaskList;
