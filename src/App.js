@@ -86,7 +86,7 @@ function App() {
         </div>
       </header>
       <div className={`clock-container ${isClockMinimized ? 'minimized-clock' : ''}`}>
-        <AnalogClock /> 
+        <AnalogClock />
       </div>
       <div>
         {!user ? (
@@ -111,7 +111,7 @@ function App() {
           </div>
         )}
       </div>
-      <VideoCall />
+      {!user ? <h2 className="videoCall">Login to create a meeting or join a call</h2> : <VideoCall />}
     </div>
   )
 }

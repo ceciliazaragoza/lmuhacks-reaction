@@ -18,17 +18,21 @@ export default function JoinScreen(props) {
   }
 
   return (
-    <div>
-      <input
-        type="text"
-        placeholder="Enter Meeting Id"
-        onChange={e => {
-          setMeetingId(e.target.value)
-        }}
-      />
-      <button onClick={onClick}>Join</button>
-      {' or '}
-      <button onClick={onClick}>Create Meeting</button>
+    <div className="join-screen">
+      <div className="input-join">
+        <input
+          type="text"
+          placeholder="Enter Meeting Id"
+          onChange={e => {
+            setMeetingId(e.target.value)
+          }}
+        />
+        <button onClick={onClick}>Join</button>
+      </div>
+      <div>{' or '}</div>
+      <div>
+        <button onClick={onClick}>Create Meeting</button>
+      </div>
     </div>
   )
 }
