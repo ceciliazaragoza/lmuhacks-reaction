@@ -5,7 +5,6 @@ function Timer( {user, openTaskModal} ) {
   const [focusSeconds, setFocusSeconds] = useState(0);
   const [breakMinutes, setBreakMinutes] = useState(5);
   const [breakSeconds, setBreakSeconds] = useState(0);
-  
   const [isActive, setIsActive] = useState(false);
   const [isFocusTimer, setIsFocusTimer] = useState(true); // Track if it's focus timer or break timer
 

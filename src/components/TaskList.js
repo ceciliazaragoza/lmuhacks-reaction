@@ -2,7 +2,7 @@
 import React from 'react';
 import TaskItem from './TaskItem';
 
-function TaskList({ tasks, onDelete, onUpdateTask }) {
+function TaskList({ tasks, onDelete, onUpdateTask, onUpdateCompleteness }) {
   console.log(tasks)
   return (
     <ul>
@@ -12,6 +12,7 @@ function TaskList({ tasks, onDelete, onUpdateTask }) {
           task={task}
           onDelete={onDelete}
           onUpdateTask={onUpdateTask}
+          onUpdateCompleteness={onUpdateCompleteness}
         />
       ))}
     </ul>

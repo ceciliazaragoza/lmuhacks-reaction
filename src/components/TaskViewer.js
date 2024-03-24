@@ -1,14 +1,14 @@
 import React from "react";
 import TaskList from "./TaskList";
 
-export default function TaskView({ handleDeleteTask, handleUpdateTask, setTaskInput, handleAddTask, taskInput, tasks, closeModal }) {
-    console.log(tasks)
+export default function TaskView({ handleDeleteTask, handleUpdateTask, handleUpdateCompleteness, setTaskInput, handleAddTask, taskInput, tasks, closeModal }) {
     return (
         <div className="modal is-active">
             <div className="modal-background"></div>
             <div className="modal-card custom-modal-content">
-                <header className="modal-card-head">
-                    <p className="modal-card-title">Task</p>
+                <header class="modal-card-head">
+                    <p class="modal-card-title">Task</p>
+                    <button class="delete" aria-label="close" onClose={closeModal}></button>
                 </header>
                 <section className="modal-card-body">
                     <form onSubmit={e => {
@@ -25,13 +25,8 @@ export default function TaskView({ handleDeleteTask, handleUpdateTask, setTaskIn
                         />
                         <button type="submit" className="button is-success">Add Task</button>
                     </form>
-                    <TaskList tasks={tasks} onDelete={handleDeleteTask} onUpdateTask={handleUpdateTask} />
+                    <TaskList tasks={tasks} onDelete={handleDeleteTask} onUpdateTask={handleUpdateTask} onUpdateCompleteness={handleUpdateCompleteness}/>
                 </section>
-                <footer className="modal-card-foot">
-                    <div className="buttons">
-                        <button class="button" onClick={closeModal}>Cancel</button>
-                    </div>
-                </footer>
             </div>
         </div>
     )
