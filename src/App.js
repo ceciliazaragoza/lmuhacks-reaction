@@ -86,7 +86,6 @@ function App() {
   return (
     <div className="App">
       <header className="App-header">
-        {/* <Timer user={user} openTaskModal={setOpenTaskModal} /> */}
         <div className="auth-container">
           {!user ? (
             <SignIn />
@@ -102,7 +101,7 @@ function App() {
         </div>
       </header>
       <div className="sticky-header">
-        <Timer />
+        <Timer user={user} openTaskModal={setOpenTaskModal} />
       </div>
       <div className={`clock-container ${isClockMinimized ? 'minimized-clock' : ''}`}>
         <AnalogClock />
