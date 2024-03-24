@@ -46,32 +46,66 @@
   display: flex;
   flex-direction: column;
   align-items: flex-end;
-  justify-content: flex-start;
-  padding: 10px 20px;
+  justify-content: flex-end;
+  padding: 680px 20px;
   font-size: calc(5px + 2vmin);
-  color: white;
-  /* font: black; */
+  color: rgb(0, 0, 0);
   box-sizing: border-box;
+  padding-top: 60px;
+}
+
+.sticky-header {
+  position: fixed; 
+  top: 0; 
+  left: 0; 
+  width: 100%; 
+  background-color: #fefefe;
+  z-index: 9; 
+  box-shadow: 0 2px 5px rgba(0,0,0,0.2); 
+  padding: 10px 20px; 
 }
 
 .auth-container {
+  position: fixed;
   display: flex;
   align-items: center;
+  margin-left: auto;
+  margin-right: 20px;
+  z-index: 999;
 }
 
 .minimized-clock {
-  /* width: 100px; 
-  height: 100px;  */
   transform: scale(0.5);
+  transform-origin: top left;
   position: fixed;
-  top: 5rem; 
-  left: 5rem; 
+  top: 4rem; 
+  left: 6rem; 
   z-index: 10;
-  transition: all 1s ease; 
+  z-index: 10;
+  transition: all 0.4s ease-in-out; 
 }
 
+.timer-fixed {
+  position: fixed; 
+  top: 0;
+  left: 0;
+  width: 100%; 
+  background-color: #fefefe; 
+  z-index: 999; 
+  box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+}
+
+.timer-fixed {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 10;
+}
+
+
 .greeting {
-  color: rgb(14, 13, 13);
+  color: rgb(0, 0, 0);
 }
 
 .avatar {
@@ -95,6 +129,7 @@
 
 .clock-container {
   margin-top: 20px;
+  transition: top 0.4s ease, left 0.4s ease, transform 0.4s ease;
 }
 
 @keyframes App-logo-spin {
