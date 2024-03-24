@@ -26,8 +26,7 @@ function App() {
 
   useEffect(() => {
     const handleScroll = () => {
-      // Determine the condition to minimize the clock
-      const shouldBeMinimized = window.scrollY > 50
+      const shouldBeMinimized = window.scrollY > 500
       setIsClockMinimized(shouldBeMinimized)
     }
 
@@ -86,7 +85,7 @@ function App() {
         </div>
       </header>
       <div className={`clock-container ${isClockMinimized ? 'minimized-clock' : ''}`}>
-        <AnalogClock /> 
+        <AnalogClock />
       </div>
       <div>
         {!user ? (
