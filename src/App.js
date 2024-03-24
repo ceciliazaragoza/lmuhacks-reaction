@@ -27,7 +27,7 @@ function App() {
 
   useEffect(() => {
     const handleScroll = () => {
-      const shouldBeMinimized = window.scrollY > 150
+      const shouldBeMinimized = window.scrollY > 500
       setIsClockMinimized(shouldBeMinimized)
     }
 
@@ -87,7 +87,7 @@ function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <Timer user={user} openTaskModal={setOpenTaskModal} />
+        {/* <Timer user={user} openTaskModal={setOpenTaskModal} /> */}
         <div className="auth-container">
           {!user ? (
             <SignIn />
@@ -102,6 +102,9 @@ function App() {
           )}
         </div>
       </header>
+      <div className="sticky-header">
+        <Timer />
+      </div>
       <div className={`clock-container ${isClockMinimized ? 'minimized-clock' : ''}`}>
         <AnalogClock />
         <AnalogClock />
@@ -109,7 +112,8 @@ function App() {
       <div>
         {!user ? (
           <h2> Login to view your tasks</h2>
-        ) : openTaskModal && (
+        ) : (
+          openTaskModal && (
             <TaskView
               handleDeleteTask={handleDeleteTask}
               handleUpdateTask={handleUpdateTask}
@@ -120,7 +124,8 @@ function App() {
               tasks={tasks}
               closeModal={closeModal}
             />
-          )}
+          )
+        )}
       </div>
       {!user ? (
         <h2 className="video-call">Login to create a meeting or join a call</h2>
