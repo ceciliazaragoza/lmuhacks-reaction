@@ -1,5 +1,9 @@
 @import "https://cdn.jsdelivr.net/npm/bulma@1.0.0/css/bulma.min.css";
 
+.App {
+  text-align: center;
+}
+
 .App-logo {
   height: 40vmin;
   pointer-events: none;
@@ -20,7 +24,7 @@
 }
 
 .App-header {
-  background-color: #282c34;
+  background-color: #fefefe;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
@@ -36,6 +40,16 @@
 .auth-container {
   display: flex;
   align-items: center;
+}
+
+.minimized-clock {
+  width: 100px; 
+  height: 100px; 
+  position: fixed;
+  top: 1rem; 
+  left: 1rem; 
+  z-index: 10;
+  transition: all 0.5s ease; 
 }
 
 .greeting {
