@@ -5,6 +5,7 @@ function Timer() {
   const [focusSeconds, setFocusSeconds] = useState(0);
   const [breakMinutes, setBreakMinutes] = useState(5);
   const [breakSeconds, setBreakSeconds] = useState(0);
+  const [showModal, setShowModal] = useState(false)
   const [isActive, setIsActive] = useState(false);
   const [isFocusTimer, setIsFocusTimer] = useState(true); // Track if it's focus timer or break timer
 
@@ -122,9 +123,15 @@ function Timer() {
                     : breakSeconds}
                 </h1>
                 <div className="buttons is-centered">
-                  <button className="button is-primary" onClick={openSettings}>Settings</button>
-                  <button className={`button ${isActive ? 'is-danger' : 'is-success'}`} onClick={toggleTimer}>{isActive ? 'Stop' : 'Start'}</button>
-                  <button className="button is-info" onClick={resetTimer}>Reset</button>
+                  <button className="button is-primary" onClick={openSettings}>
+                    Settings
+                  </button>
+                  <button className={`button ${isActive ? 'is-danger' : 'is-success'}`} onClick={toggleTimer}>
+                    {isActive ? 'Stop' : 'Start'}
+                  </button>
+                  <button className="button is-primary" onClick={() => setShowModal(true)}>
+                    Task List
+                  </button>
                 </div>
               </div>
             </div>
@@ -132,7 +139,7 @@ function Timer() {
         </div>
       </div>
     </div>
-  );
+  )
 }
 
 export default Timer;

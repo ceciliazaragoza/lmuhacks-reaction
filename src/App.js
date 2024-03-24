@@ -26,8 +26,7 @@ function App() {
 
   useEffect(() => {
     const handleScroll = () => {
-      // Determine the condition to minimize the clock
-      const shouldBeMinimized = window.scrollY > 50
+      const shouldBeMinimized = window.scrollY > 150
       setIsClockMinimized(shouldBeMinimized)
     }
 
@@ -100,10 +99,11 @@ function App() {
               }}
             >
               <input
+                class = "input"
                 type="text"
                 value={taskInput}
                 onChange={e => setTaskInput(e.target.value)}
-                placeholder="Add a new task"
+                placeholder="Add A New Task"
               />
               <button type="submit">Add Task</button>
             </form>
