@@ -26,8 +26,7 @@ function App() {
 
   useEffect(() => {
     const handleScroll = () => {
-      // Determine the condition to minimize the clock
-      const shouldBeMinimized = window.scrollY > 50
+      const shouldBeMinimized = window.scrollY > 150
       setIsClockMinimized(shouldBeMinimized)
     }
 
@@ -38,6 +37,7 @@ function App() {
   const fetchUserTasks = async () => {
     console.log('Performing fetching user task')
     console.log('Current user id is ', user.uid)
+    console.log('current user name', user.displayName)
     const userTasks = await fetchTasks(user.uid)
     console.log('userTask is ', userTasks)
     setTasks(userTasks)
@@ -100,10 +100,11 @@ function App() {
               }}
             >
               <input
+                className="input"
                 type="text"
                 value={taskInput}
                 onChange={e => setTaskInput(e.target.value)}
-                placeholder="Add a new task"
+                placeholder="Add A New Task"
               />
               <button type="submit">Add Task</button>
             </form>
@@ -111,12 +112,15 @@ function App() {
           </div>
         )}
       </div>
-      {!user ? <h2 className="videoCall">Login to create a meeting or join a call</h2> : <VideoCall />}
+      {!user ? (
+        <h2 className="videoCall">Login to create a meeting or join a call</h2>
+      ) : (
+        <VideoCall googleDisplayName={user.displayName} />
+      )}
     </div>
   )
 }
 
-const rootElement = document.getElementById('root')
-ReactDOM.render(<App />, rootElement)
+// const rootElement = document.getElementById('root')
 
 export default App

@@ -4,9 +4,7 @@ import ReactPlayer from 'react-player'
 
 export default function ParticipantView(props) {
   const micRef = useRef(null)
-  const { webcamStream, micStream, webcamOn, micOn, isLocal, displayName } = useParticipant(
-    props.participantId
-  )
+  const { webcamStream, micStream, webcamOn, micOn, isLocal, displayName } = useParticipant(props.participantId)
 
   const videoStream = useMemo(() => {
     if (webcamOn && webcamStream) {
@@ -23,9 +21,7 @@ export default function ParticipantView(props) {
         mediaStream.addTrack(micStream.track)
 
         micRef.current.srcObject = mediaStream
-        micRef.current
-          .play()
-          .catch(error => console.error('videoElem.current.play() failed', error))
+        micRef.current.play().catch(error => console.error('videoElem.current.play() failed', error))
       } else {
         micRef.current.srcObject = null
       }

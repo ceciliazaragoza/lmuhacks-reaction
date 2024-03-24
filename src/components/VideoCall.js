@@ -6,7 +6,8 @@ import './VideoCall.css'
 const VIDEOSDK_TOKEN = process.env.REACT_APP_VIDEOSDK_TOKEN
 
 // Thank you to VideoSDK docs!: https://docs.videosdk.live/react/guide/video-and-audio-calling-api-sdk/concept-and-architecture
-const VideoCall = () => {
+const VideoCall = props => {
+  const { googleDisplayName } = props
   const [meetingId, setVidCallMeetingId] = useState(null)
 
   //This will set Meeting Id to null when meeting is left or ended
@@ -21,7 +22,7 @@ const VideoCall = () => {
           meetingId,
           micEnabled: true,
           webcamEnabled: true,
-          name: 'C.V. Raman'
+          name: googleDisplayName
         }}
         token={VIDEOSDK_TOKEN}
       >

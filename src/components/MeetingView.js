@@ -4,6 +4,10 @@ import Controls from './Controls'
 import ParticipantView from './ParticipantView'
 
 export default function MeetingView(props) {
+  let meetingId = props.meetingId
+  let onMeetingLeave = props.onMeetingLeave
+  // <MeetingView meetingId={meetingId} onMeetingLeave={onMeetingLeave} displayName={displayName} />
+
   const [joined, setJoined] = useState(null)
   //Get the method which will be used to join the meeting.
   //We will also get the participants list to display all participants
@@ -15,8 +19,8 @@ export default function MeetingView(props) {
     },
     //callback for when meeting is left
     onMeetingLeft: () => {
-      props.onMeetingLeave()
-    },
+      onMeetingLeave()
+    }
   })
   const joinMeeting = () => {
     setJoined('JOINING')
@@ -25,7 +29,7 @@ export default function MeetingView(props) {
 
   return (
     <div className="container">
-      <h3>Meeting Id: {props.meetingId}</h3>
+      <h3>Meeting Id: {meetingId}</h3>
       {joined && joined == 'JOINED' ? (
         <div>
           <Controls />
