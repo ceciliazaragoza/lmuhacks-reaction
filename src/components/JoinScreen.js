@@ -18,19 +18,29 @@ export default function JoinScreen(props) {
   }
 
   return (
-    <div>
-      <div> 
-        <input
-          type="text"
-          placeholder="Enter Meeting ID"
-          onChange={e => {
-            setMeetingId(e.target.value)
-          }}
-        />
-      <button onClick={onClick}>Join</button></div>
-      <div>{' or '}</div>
-      <div><button onClick={onClick}>Create Meeting</button></div>
-      
+    <div className="card">
+      <div className="card-content">
+        <div className="content" style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }}>
+          <div style={{ marginBottom: '10px' }}>
+            <input
+              className="input is-normal"
+              type="text"
+              placeholder="Enter Meeting ID"
+              onChange={(e) => setMeetingId(e.target.value)}
+              style={{ marginRight: '10px', marginBottom: '10px', width: '10vw' }}
+            />
+            <button className="button is-primary" onClick={onClick} style={{ marginRight: '10px', marginBottom: '10px' }}>Join</button>
+          </div>
+          <div style={{ marginTop: '-10px'}}>
+            <span style={{ marginBottom: '10px' }}>or</span>
+            <div style={{ marginBottom: '10px' }}></div> {/* Added empty div for spacing */}
+            <button className="button is-success" onClick={onClick} style={{ marginBottom: '10px' }}>Create Meeting</button>
+          </div>
+        </div>
+      </div>
     </div>
-  )
+  );
+  
+  
+
 }
