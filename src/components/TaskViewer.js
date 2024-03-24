@@ -1,15 +1,14 @@
 import React from "react";
 import TaskList from "./TaskList";
 
-export default function TaskView({ handleDeleteTask, handleUpdateTask, setTaskInput, handleAddTask, taskInput, tasks, closeModal }) {
-    console.log(tasks)
+export default function TaskView({ handleDeleteTask, handleUpdateTask, handleUpdateCompleteness, setTaskInput, handleAddTask, taskInput, tasks, closeModal }) {
     return (
         <div className="modal is-active">
             <div className="modal-background"></div>
             <div className="modal-card custom-modal-content">
                 <header class="modal-card-head">
                     <p class="modal-card-title">Task</p>
-                    <button class="delete" aria-label="close"></button>
+                    <button class="delete" aria-label="close" onClose={closeModal}></button>
                 </header>
                 <section class="modal-card-body">
                     <form onSubmit={e => {
@@ -24,15 +23,14 @@ export default function TaskView({ handleDeleteTask, handleUpdateTask, setTaskIn
                         />
                         <button type="submit" className="button is-success">Add Task</button>
                     </form>
-                    <TaskList tasks={tasks} onDelete={handleDeleteTask} onUpdateTask={handleUpdateTask} />
+                    <TaskList tasks={tasks} onDelete={handleDeleteTask} onUpdateTask={handleUpdateTask} onUpdateCompleteness={handleUpdateCompleteness}/>
                 </section>
-                <footer class="modal-card-foot">
-                    <div class="buttons">
-                        <button class="button" onClick={closeModal}>Cancel</button>
+                <footer className="modal-card-foot">
+                    <div className="buttons">
+                        <button className="button" onClick={closeModal}>Cancel</button>
                     </div>
                 </footer>
             </div>
-            {/* <button className="modal-close is-large" aria-label="close" onClick={closeModal}></button> */}
         </div>
     )
 }

@@ -7,7 +7,6 @@ import VideoCall from './components/VideoCall.js'
 import './components/clock.css'
 import { createTask, fetchTasks, deleteTask } from './services/taskService'
 import { SignIn, SignOut, useAuthentication } from './services/authService'
-import TaskList from './components/TaskList'
 import TaskView from './components/TaskViewer'
 
 function App() {
@@ -69,6 +68,19 @@ function App() {
     setTasks(updatedTasks)
   }
 
+  const handleUpdateCompleteness = async (taskId, newCompleteness) => {
+    console.log("The current completeness data", newCompleteness)
+    const updatedTasks = tasks.map(task => {
+      if (task.id === taskId) {
+        return { ...task, completed: newCompleteness }
+      }
+      console.log("Task that is updated ", task)
+      return task
+    })
+    setTasks(updatedTasks)
+  }
+
+
   const closeModal = () => {
     setOpenTaskModal(false);
   }
@@ -99,28 +111,11 @@ function App() {
         {!user ? (
           <h2> Login to view your tasks</h2>
         ) : ( openTaskModal ? 
-          // <div className='modal'>
-          //   <form
-          //     onSubmit={e => {
-          //       e.preventDefault()
-          //       handleAddTask()
-          //     }}
-          //   >
-          //     <input
-          //       type="text"
-          //       value={taskInput}
-          //       onChange={e => setTaskInput(e.target.value)}
-          //       placeholder="Add a new task"
-          //     />
-          //     <button type="submit">Add Task</button>
-          //   </form>
-          //   <TaskList tasks={tasks} onDelete={handleDeleteTask} onUpdateTask={handleUpdateTask} />
-          // </div>
-          // <TaskView handleDeleteTask={handleDeleteTask} handleUpdateTask = {handleUpdateTask} setTaskInput={setTaskInput} handleAddTask={handleAddTask} taskInput={taskInput} tasks={tasks}/>
           openTaskModal && (
             <TaskView
               handleDeleteTask={handleDeleteTask}
               handleUpdateTask={handleUpdateTask}
+              handleUpdateCompleteness={handleUpdateCompleteness}
               setTaskInput={setTaskInput}
               handleAddTask={handleAddTask}
               taskInput={taskInput}
