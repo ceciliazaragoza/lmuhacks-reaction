@@ -1,4 +1,3 @@
-// TaskItem.js
 import React, { useState } from 'react';
 import { updateTaskDetail } from '../services/taskService';
 
@@ -21,18 +20,20 @@ function TaskItem({ task, onDelete, onUpdateTask }) {
       {isEditing ? (
         <>
           <input
+            className="input is-normal"
             type="text"
             value={editedTaskDetail}
             onChange={(e) => setEditedTaskDetail(e.target.value)}
+            style={{ marginRight: '10px', marginBottom: '10px', width: '10vw' }}
           />
-          <button onClick={handleEdit}>Save</button>
+          <button className="button is-primary" onClick={handleEdit}>Save</button>
         </>
       ) : (
-        <>
-          <span>{task.task}</span>
-          <button onClick={() => onDelete(task.id)}>Delete</button>
-          <button onClick={() => setIsEditing(true)}>Edit</button>
-        </>
+        <div style={{ display: 'flex', alignItems: 'center'}}>
+          <span style={{ flex: '1' }}>{task.task}</span>
+          <button className="button is-danger" onClick={() => onDelete(task.id)} style={{ marginRight: '10px', marginBottom: '10px' }}>Delete</button>
+          <button className="button is-warning" onClick={() => setIsEditing(true)} style={{ marginBottom: '10px' }}>Edit</button>
+        </div>
       )}
     </li>
   );

@@ -1,5 +1,5 @@
 import './App.css'
-import React, { useEffect, useMemo, useRef, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import ReactDOM from 'react-dom'
 import Timer from './components/timer'
 import AnalogClock from './components/AnalogClock'
@@ -7,7 +7,8 @@ import VideoCall from './components/VideoCall.js'
 import './components/clock.css'
 import { createTask, fetchTasks, deleteTask } from './services/taskService'
 import { SignIn, SignOut, useAuthentication } from './services/authService'
-import TaskList from './components/TaskList'
+// import TaskList from './components/TaskList'
+import TaskView from './components/TaskViewer'
 
 function App() {
   const [tasks, setTasks] = useState([])
@@ -17,6 +18,7 @@ function App() {
   const toggleSignOut = () => setShowSignOut(!showSignOut)
   const [showSignOut, setShowSignOut] = useState(false)
   const [isClockMinimized, setIsClockMinimized] = useState(false)
+  const [openTaskModal, setOpenTaskModal] = useState(false)
 
   useEffect(() => {
     if (user) {
@@ -40,13 +42,13 @@ function App() {
     const userTasks = await fetchTasks(user.uid)
     console.log('userTask is ', userTasks)
     setTasks(userTasks)
+    console.log("Tasks", tasks)
   }
 
   const handleAddTask = async () => {
     if (!taskInput.trim()) return
     await createTask({ task: taskInput, author: user.uid, completed: false })
     setTaskInput('')
-    console.log('Should perform fetching User Task')
     fetchUserTasks()
   }
 
@@ -66,10 +68,15 @@ function App() {
     setTasks(updatedTasks)
   }
 
+  const closeModal = () => {
+    setOpenTaskModal(false);
+  }
+
+
   return (
     <div className="App">
       <header className="App-header">
-        <Timer />
+        <Timer user ={user} openTaskModal={setOpenTaskModal}/>
         <div className="auth-container">
           {!user ? (
             <SignIn />
@@ -90,27 +97,36 @@ function App() {
       <div>
         {!user ? (
           <h2> Login to view your tasks</h2>
-        ) : (
-          <div>
-            <form
-              onSubmit={e => {
-                e.preventDefault()
-                handleAddTask()
-              }}
-            >
-              <input
-                class = "input is-normal"
-                type="text"
-                value={taskInput}
-                onChange={e => setTaskInput(e.target.value)}
-                placeholder="Add A New Task"
-                style={{ width: '10vw' }}
-              />
-              <button type="submit">Add Task</button>
-            </form>
-            <TaskList tasks={tasks} onDelete={handleDeleteTask} onUpdateTask={handleUpdateTask} />
-          </div>
-        )}
+        ) : ( openTaskModal ? 
+          // <div className='modal'>
+          //   <form
+          //     onSubmit={e => {
+          //       e.preventDefault()
+          //       handleAddTask()
+          //     }}
+          //   >
+          //     <input
+          //       type="text"
+          //       value={taskInput}
+          //       onChange={e => setTaskInput(e.target.value)}
+          //       placeholder="Add a new task"
+          //     />
+          //     <button type="submit">Add Task</button>
+          //   </form>
+          //   <TaskList tasks={tasks} onDelete={handleDeleteTask} onUpdateTask={handleUpdateTask} />
+          // </div>
+          // <TaskView handleDeleteTask={handleDeleteTask} handleUpdateTask = {handleUpdateTask} setTaskInput={setTaskInput} handleAddTask={handleAddTask} taskInput={taskInput} tasks={tasks}/>
+          openTaskModal && (
+            <TaskView
+              handleDeleteTask={handleDeleteTask}
+              handleUpdateTask={handleUpdateTask}
+              setTaskInput={setTaskInput}
+              handleAddTask={handleAddTask}
+              taskInput={taskInput}
+              tasks={tasks}
+              closeModal={closeModal}
+            />
+          ) : <></> )}
       </div>
       <VideoCall />
     </div>
