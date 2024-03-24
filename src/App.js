@@ -100,11 +100,12 @@ function App() {
               }}
             >
               <input
-                className="input"
+                className="input is-normal"
                 type="text"
                 value={taskInput}
                 onChange={e => setTaskInput(e.target.value)}
                 placeholder="Add A New Task"
+                style={{ width: '10vw' }}
               />
               <button type="submit">Add Task</button>
             </form>
