@@ -1,4 +1,3 @@
-// TaskItem.js
 import React, { useState } from 'react'
 import { updateTaskDetail, updateTaskCompleteness } from '../services/taskService'
 
@@ -45,7 +44,7 @@ function TaskItem({ task, onDelete, onUpdateTask, onUpdateCompleteness }) {
            <span style={{ textDecoration: task.completed ? 'line-through' : 'none', flex: '1'}}>
             {task.task}
           </span>
-          <button onClick={handleToggleCompleteness}>
+          <button className={`button is-info`} onClick={handleToggleCompleteness} style={{ marginRight: '10px', marginBottom: '10px' }}>
             {task.completed ? 'Not Complete' : 'Complete'}
           </button>
           <button className="button is-danger" onClick={() => onDelete(task.id)} style={{ marginRight: '10px', marginBottom: '10px' }}>Delete</button>
