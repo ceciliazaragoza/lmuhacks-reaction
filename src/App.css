@@ -9,6 +9,23 @@
   pointer-events: none;
 }
 
+.custom-modal-content {
+  background-color: white;
+  position: fixed;
+    /* Ensure the modal stays fixed */
+    top: 50%;
+    /* Place the top of the modal at the vertical center */
+    left: 50%;
+    /* Place the left side of the modal at the horizontal center */
+    transform: translate(-50%, -50%);
+    /* Move the modal back by half its width and height to center it */
+    max-width: 80%;
+    /* Limit the maximum width of the modal */
+    max-height: 80%;
+    /* Limit the maximum height of the modal */
+    overflow-y: auto;
+}
+
 @media (prefers-reduced-motion: no-preference) {
   .App-logo {
     animation: App-logo-spin infinite 20s linear;
@@ -32,9 +49,9 @@
   justify-content: flex-start;
   padding: 10px 20px;
   font-size: calc(5px + 2vmin);
-  color: rgb(21, 20, 20);
+  color: white;
+  /* font: black; */
   box-sizing: border-box;
-  padding: 20px;
 }
 
 .auth-container {
