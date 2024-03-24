@@ -27,7 +27,7 @@ function App() {
 
   useEffect(() => {
     const handleScroll = () => {
-      const shouldBeMinimized = window.scrollY > 500
+      const shouldBeMinimized = window.scrollY > 150
       setIsClockMinimized(shouldBeMinimized)
     }
 
@@ -38,7 +38,6 @@ function App() {
   const fetchUserTasks = async () => {
     console.log('Performing fetching user task')
     console.log('Current user id is ', user.uid)
-    console.log('current user name', user.displayName)
     const userTasks = await fetchTasks(user.uid)
     console.log('userTask is ', userTasks)
     setTasks(userTasks)
@@ -87,7 +86,7 @@ function App() {
   return (
     <div className="App">
       <header className="App-header">
-        {/* <Timer user={user} openTaskModal={setOpenTaskModal} /> */}
+        <Timer user={user} openTaskModal={setOpenTaskModal} />
         <div className="auth-container">
           {!user ? (
             <SignIn />
@@ -102,19 +101,11 @@ function App() {
           )}
         </div>
       </header>
-      <div className="sticky-header">
-        <Timer />
-      </div>
       <div className={`clock-container ${isClockMinimized ? 'minimized-clock' : ''}`}>
-        <AnalogClock />
         <AnalogClock />
       </div>
       <div>
-        {!user ? (
-          <h2> Login to view your tasks</h2>
-        ) : (
-          openTaskModal && (
-            <TaskView
+        {openTaskModal && <TaskView
               handleDeleteTask={handleDeleteTask}
               handleUpdateTask={handleUpdateTask}
               handleUpdateCompleteness={handleUpdateCompleteness}
@@ -122,20 +113,20 @@ function App() {
               handleAddTask={handleAddTask}
               taskInput={taskInput}
               tasks={tasks}
-              closeModal={closeModal}
+              closeModal={closeModal} />}
+        {/* {!user ? (
+          <h2> Login to view your tasks</h2>
+        ) : openTaskModal && (
+            
             />
-          )
-        )}
+          // )} */}
       </div>
-      {!user ? (
-        <h2 className="video-call">Login to create a meeting or join a call</h2>
-      ) : (
-        <VideoCall googleDisplayName={user.displayName} />
-      )}
+      <VideoCall />
     </div>
   )
 }
 
-// const rootElement = document.getElementById('root')
+const rootElement = document.getElementById('root')
+ReactDOM.render(<App />, rootElement)
 
 export default App
