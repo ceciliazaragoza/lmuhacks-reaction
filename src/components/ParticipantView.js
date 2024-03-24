@@ -31,9 +31,7 @@ export default function ParticipantView(props) {
 
   return (
     <div>
-      <p>
-        Participant: {displayName} | Webcam: {webcamOn ? 'ON' : 'OFF'} | Mic: {micOn ? 'ON' : 'OFF'}
-      </p>
+      <p className="participant-name">Participant: {displayName}</p>
       <audio ref={micRef} autoPlay playsInline muted={isLocal} />
       <Controls webCamOn={webcamOn} micOn={micOn} />
       {webcamOn && (
@@ -48,8 +46,8 @@ export default function ParticipantView(props) {
           //
           url={videoStream}
           //
-          height={'300px'}
-          width={'300px'}
+          height={'400px'}
+          width={'400px'}
           onError={err => {
             console.log(err, 'participant video error')
           }}
