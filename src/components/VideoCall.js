@@ -16,7 +16,7 @@ const VideoCall = props => {
   }
 
   return VIDEOSDK_TOKEN && meetingId ? (
-    <div className="videoCall">
+    <div className="video-call">
       <MeetingProvider
         config={{
           meetingId,
@@ -30,7 +30,7 @@ const VideoCall = props => {
       </MeetingProvider>
     </div>
   ) : (
-    <div className="videoCall">
+    <div className="video-call">
       <JoinScreen getMeetingAndToken={setVidCallMeetingId} />
     </div>
   )

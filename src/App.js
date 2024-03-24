@@ -113,7 +113,7 @@ function App() {
         )}
       </div>
       {!user ? (
-        <h2 className="videoCall">Login to create a meeting or join a call</h2>
+        <h2 className="video-call">Login to create a meeting or join a call</h2>
       ) : (
         <VideoCall googleDisplayName={user.displayName} />
       )}
