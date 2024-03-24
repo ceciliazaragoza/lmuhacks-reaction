@@ -1,4 +1,9 @@
+<<<<<<< HEAD
 @import url("https://fonts.googleapis.com/css?family=Source+Sans+Pro&display=swap");
+=======
+@import url('https://fonts.googleapis.com/css?family=Source+Sans+Pro&display=swap');
+
+>>>>>>> d7946800d168b851a3491a15e16e8209df6fc0d9
 .App {
   font-family: sans-serif;
 }
@@ -19,7 +24,11 @@
 
 .clock::after {
   background: #aaa;
+<<<<<<< HEAD
   content: "";
+=======
+  content: '';
+>>>>>>> d7946800d168b851a3491a15e16e8209df6fc0d9
   width: 12px;
   height: 12px;
   border-radius: 50%;
@@ -63,7 +72,11 @@
 
 .clock span {
   position: absolute;
+<<<<<<< HEAD
   font-family: "Source Sans Pro", sans-serif;
+=======
+  font-family: 'Source Sans Pro', sans-serif;
+>>>>>>> d7946800d168b851a3491a15e16e8209df6fc0d9
   font-weight: 700;
 }
 

@@ -1,61 +1,43 @@
-import React, { useEffect, useMemo, useRef, useState } from "react";
-import {
-  MeetingProvider,
-  useMeeting,
-  useParticipant,
-} from "@videosdk.live/react-sdk";
-import ReactPlayer from "react-player";
+import React, { useState } from 'react'
+import { useMeeting } from '@videosdk.live/react-sdk'
+import Controls from './Controls'
+import ParticipantView from './ParticipantView'
 
-function MeetingView() {
-  const [joined, setJoined] = useState(null);
+export default function MeetingView(props) {
+  const [joined, setJoined] = useState(null)
   //Get the method which will be used to join the meeting.
   //We will also get the participants list to display all participants
+
   const { join, participants } = useMeeting({
     //callback for when meeting is joined successfully
     onMeetingJoined: () => {
-      setJoined("JOINED");
+      setJoined('JOINED')
     },
-  });
-
+    //callback for when meeting is left
+    onMeetingLeft: () => {
+      props.onMeetingLeave()
+    },
+  })
   const joinMeeting = () => {
-    setJoined("JOINING");
-    join();
-  };
+    setJoined('JOINING')
+    join()
+  }
 
   return (
     <div className="container">
-      {joined && joined == "JOINED" ? (
+      <h3>Meeting Id: {props.meetingId}</h3>
+      {joined && joined == 'JOINED' ? (
         <div>
-          {[...participants.keys()].map((participantId) => (
-            <ParticipantView
-              participantId={participantId}
-              key={participantId}
-            />
+          <Controls />
+          {[...participants.keys()].map(participantId => (
+            <ParticipantView participantId={participantId} key={participantId} />
           ))}
         </div>
-      ) : joined && joined == "JOINING" ? (
+      ) : joined && joined == 'JOINING' ? (
         <p>Joining the meeting...</p>
       ) : (
-        <button onClick={joinMeeting}>Join the meeting</button>
+        <button onClick={joinMeeting}>Join</button>
       )}
     </div>
-  );
+  )
 }
-
-const videoCall = () => {
-  return (
-    <MeetingProvider
-      config={{
-        meetingId: "qx9y-aczv-qqla",
-        micEnabled: true,
-        webcamEnabled: true,
-        name: "Cecilia's Org",
-      }}
-      token="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhcGlrZXkiOiI2ZTQzMThiYi1hZTBlLTQxNWMtOThhMi1lMzI0NTlkMjY3MWQiLCJwZXJtaXNzaW9ucyI6WyJhbGxvd19qb2luIl0sImlhdCI6MTcxMTIxNzE4MCwiZXhwIjoxNzExMzAzNTgwfQ.xFHtZhXKAg8_YI9eUKjm8hjxdiwUGdbBspAhbsitR0k"
-    >
-      <MeetingView />
-    </MeetingProvider>
-  );
-};
-
-export default videoCall;

@@ -1,3 +1,5 @@
+@import "https://cdn.jsdelivr.net/npm/bulma@1.0.0/css/bulma.min.css";
+
 .App {
   text-align: center;
 }
@@ -22,10 +24,58 @@
 }
 
 .App-header {
+<<<<<<< HEAD
   background-color: #282c34;
   font-size: calc(10px + 2vmin);
   color: white;
   padding: 20px;
+=======
+  background-color: #fefefe;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  justify-content: flex-start;
+  padding: 10px 20px;
+  font-size: calc(5px + 2vmin);
+  color: white;
+  box-sizing: border-box;
+  padding: 20px;
+}
+
+.auth-container {
+  display: flex;
+  align-items: center;
+}
+
+.minimized-clock {
+  width: 100px; 
+  height: 100px; 
+  position: fixed;
+  top: 1rem; 
+  left: 1rem; 
+  z-index: 10;
+  transition: all 0.5s ease; 
+}
+
+.greeting {
+  color: white;
+}
+
+.avatar {
+  height: 50px;
+  width: 50px;
+  border-radius: 50%;
+  background-color: #007bff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  font-size: 20px;
+  font-weight: bold;
+  margin-right: 10px;
+  margin-left: 10px;
+>>>>>>> d7946800d168b851a3491a15e16e8209df6fc0d9
 }
 
 .App-link {

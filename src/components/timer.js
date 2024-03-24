@@ -97,6 +97,7 @@ function Timer() {
   };
 
   return (
+<<<<<<< HEAD
     <div>
       <div>
         <button onClick={openSettings}>Settings</button>
@@ -107,6 +108,41 @@ function Timer() {
       <div>
         <button onClick={toggleTimer}>{isActive ? 'Stop' : 'Start'}</button>
         <button onClick={resetTimer}>Reset</button>
+=======
+    <div className="container">
+      <div className="columns is-centered">
+        <div className="column is-half">
+          <div className="card">
+            <div className="card-content">
+              <div className="content">
+                <h1>
+                  {isFocusTimer ? 'Focus Time Remaining' : 'Break Time Remaining'}:{' '}
+                  {isFocusTimer
+                    ? focusMinutes < 10
+                      ? `0${focusMinutes}`
+                      : focusMinutes
+                    : breakMinutes < 10
+                    ? `0${breakMinutes}`
+                    : breakMinutes}
+                  :
+                  {isFocusTimer
+                    ? focusSeconds < 10
+                      ? `0${focusSeconds}`
+                      : focusSeconds
+                    : breakSeconds < 10
+                    ? `0${breakSeconds}`
+                    : breakSeconds}
+                </h1>
+                <div className="buttons is-centered">
+                  <button className="button is-primary" onClick={openSettings}>Settings</button>
+                  <button className={`button ${isActive ? 'is-danger' : 'is-success'}`} onClick={toggleTimer}>{isActive ? 'Stop' : 'Start'}</button>
+                  <button className="button is-info" onClick={resetTimer}>Reset</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+>>>>>>> d7946800d168b851a3491a15e16e8209df6fc0d9
       </div>
     </div>
   );
