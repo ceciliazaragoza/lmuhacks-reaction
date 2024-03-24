@@ -1,12 +1,18 @@
-import { useMeeting } from "@videosdk.live/react-sdk";
+import { useMeeting } from '@videosdk.live/react-sdk'
 
 export default function Controls() {
-  const { leave, toggleMic, toggleWebcam } = useMeeting();
+  const { leave, toggleMic, toggleWebcam } = useMeeting()
   return (
-    <div>
-      <button onClick={() => toggleMic()}>toggleMic</button>
-      <button onClick={() => toggleWebcam()}>toggleWebcam</button>
-      <button onClick={() => leave()}>Leave</button>
+    <div className="control-buttons">
+      <button className="button is-primary" onClick={() => toggleMic()}>
+        toggleMic
+      </button>
+      <button className="button is-success" onClick={() => toggleWebcam()}>
+        toggleWebcam
+      </button>
+      <button className="button is-primary" onClick={() => leave()}>
+        Leave
+      </button>
     </div>
   )
 }

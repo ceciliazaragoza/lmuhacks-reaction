@@ -33,7 +33,7 @@ export default function MeetingView(props) {
       {joined && joined == 'JOINED' ? (
         <div>
           <Controls />
-          <div class="participant-grid">
+          <div className="participant-grid">
             {[...participants.keys()].map(participantId => (
               <ParticipantView participantId={participantId} key={participantId} />
             ))}
@@ -42,7 +42,9 @@ export default function MeetingView(props) {
       ) : joined && joined == 'JOINING' ? (
         <p>Joining the meeting...</p>
       ) : (
-        <button onClick={joinMeeting}>Join</button>
+        <button className="button is-primary" onClick={joinMeeting}>
+          Join
+        </button>
       )}
     </div>
   )

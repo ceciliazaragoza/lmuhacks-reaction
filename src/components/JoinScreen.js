@@ -1,18 +1,35 @@
 import React, { useState } from 'react'
-import { createMeeting } from '../apis/videoAPI.js'
-const VIDEOSDK_TOKEN = process.env.REACT_APP_VIDEOSDK_TOKEN
+import { toast } from 'react-toastify'
+import { createMeeting, validateMeeting } from '../apis/videoAPI.js'
 
 export default function JoinScreen(props) {
   const { getMeetingAndToken: setVidCallMeetingId } = props
 
   const [meetingId, setMeetingId] = useState(null)
+  const [inputMeetingIdErr, setInputMeetingIdErr] = useState(false)
   const getMeetingAndToken = async id => {
-    const meetingId = id == null ? await createMeeting({ token: VIDEOSDK_TOKEN }) : id
-    setMeetingId(meetingId)
-    setVidCallMeetingId(meetingId)
+    console.log('meetingId', meetingId)
+    const newMeetingId = await createMeeting()
+    setMeetingId(newMeetingId)
+    setVidCallMeetingId(newMeetingId)
   }
 
-  const onClick = async () => {
+  // const onClick = async () => {
+  //   await getMeetingAndToken(meetingId)
+  //   console.log('join meeting button clicked')
+  // }
+
+  const joinMeetingToken = async () => {
+    if (meetingId != null) {
+      setInputMeetingIdErr(false)
+      await getMeetingAndToken(meetingId)
+    } else {
+      setInputMeetingIdErr(true)
+      console.log('input meeting id plz')
+    }
+  }
+
+  const createMeetingToken = async () => {
     await getMeetingAndToken(meetingId)
     console.log('join meeting button clicked')
   }
@@ -20,27 +37,36 @@ export default function JoinScreen(props) {
   return (
     <div className="card">
       <div className="card-content">
-        <div className="content" style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }}>
+        <div
+          className="content"
+          style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }}
+        >
           <div style={{ marginBottom: '10px' }}>
             <input
               className="input is-normal"
               type="text"
               placeholder="Enter Meeting ID"
-              onChange={(e) => setMeetingId(e.target.value)}
+              onChange={e => setMeetingId(e.target.value)}
               style={{ marginRight: '10px', marginBottom: '10px', width: '10vw' }}
             />
-            <button className="button is-primary" onClick={onClick} style={{ marginRight: '10px', marginBottom: '10px' }}>Join</button>
+            <button
+              className="button is-primary"
+              onClick={joinMeetingToken}
+              style={{ marginRight: '10px', marginBottom: '10px' }}
+            >
+              Join
+            </button>
           </div>
-          <div style={{ marginTop: '-10px'}}>
+          <div style={{ marginTop: '-10px' }}>
+            {inputMeetingIdErr && <div>input meeting id plz</div>}
             <span style={{ marginBottom: '10px' }}>or</span>
             <div style={{ marginBottom: '10px' }}></div> {/* Added empty div for spacing */}
-            <button className="button is-success" onClick={onClick} style={{ marginBottom: '10px' }}>Create Meeting</button>
+            <button className="button is-success" onClick={createMeetingToken} style={{ marginBottom: '10px' }}>
+              Create Meeting
+            </button>
           </div>
         </div>
       </div>
     </div>
-  );
-  
-  
-
+  )
 }

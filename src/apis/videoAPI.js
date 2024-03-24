@@ -1,6 +1,6 @@
 // Thank you to Video SDK youtube channel for the help!
 //This is the Auth token, you will use it to generate a meeting and connect to it
-// const API_BASE_URL = "https://api.videosdk.live";
+const API_BASE_URL = 'https://api.videosdk.live'
 const VIDEOSDK_TOKEN = process.env.REACT_APP_VIDEOSDK_TOKEN
 const API_AUTH_URL = process.env.REACT_APP_AUTH_URL
 // API call to create a meeting
@@ -11,7 +11,7 @@ export const getToken = async () => {
     return VIDEOSDK_TOKEN
   } else if (API_AUTH_URL) {
     const res = await fetch(`${API_AUTH_URL}/get-token`, {
-      method: 'GET',
+      method: 'GET'
     })
     const { token } = await res.json()
     return token
@@ -20,54 +20,45 @@ export const getToken = async () => {
   }
 }
 
-export const createMeeting = async ({ token }) => {
-  console.log('createMeeting called')
-  // const url = `${API_BASE_URL}/v2/rooms`;
-  const res = await fetch(`https://api.videosdk.live/v2/rooms`, {
+export const createMeeting = async () => {
+  const res = await fetch(`${API_BASE_URL}/v2/rooms`, {
     method: 'POST',
     headers: {
       authorization: `${VIDEOSDK_TOKEN}`,
-      'Content-Type': 'application/json',
+      'Content-Type': 'application/json'
     },
-    body: JSON.stringify({}),
+    body: JSON.stringify({})
   })
 
   const { roomId } = await res.json()
 
-  console.log('roomId: ', roomId)
-
   return roomId
-
-  // const response = await fetch(url, options);
-  // const data = await response.json();
-
-  // if (data.roomId) {
-  //   return { meetingId: data.roomId, err: null };
-  // } else {
-  //   return { meetingId: null, err: data.error };
-  // }
 }
 
-// export const validateMeeting = async ({ roomId, token }) => {
-//   const url = `${API_BASE_URL}/v2/rooms/validate/${roomId}`;
+export const validateMeeting = async ({ roomId }) => {
+  console.log('roomId input')
+  const url = `${API_BASE_URL}/v2/rooms/validate/${roomId}`
 
-//   const options = {
-//     method: "GET",
-//     headers: { Authorization: token, "Content-Type": "application/json" },
-//   };
+  const options = {
+    method: 'GET',
+    headers: { Authorization: `${VIDEOSDK_TOKEN}`, 'Content-Type': 'application/json' }
+  }
 
-//   const response = await fetch(url, options);
+  const response = await fetch(url, options)
 
-//   if (response.status === 400) {
-//     const data = await response.text();
-//     return { meetingId: null, err: data };
-//   }
+  if (response.status === 400) {
+    const data = await response.text()
+    console.log('response.status == 400 data returned', data)
+    return { meetingId: null, err: data }
+  }
 
-//   const data = await response.json();
+  const data = await response.json()
 
-//   if (data.roomId) {
-//     return { meetingId: data.roomId, err: null };
-//   } else {
-//     return { meetingId: null, err: data.error };
-//   }
-// };
+  if (data.roomId) {
+    console.log('data.roomId is valid')
+    return { meetingId: data.roomId, err: null }
+  } else {
+    console.log('data.roomId is not valid')
+    return { meetingId: null, err: data.error }
+  }
+}
