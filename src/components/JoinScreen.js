@@ -25,7 +25,6 @@ export default function JoinScreen(props) {
       await getMeetingAndToken(meetingId)
     } else {
       setInputMeetingIdErr(true)
-      console.log('input meeting id plz')
     }
   }
 
@@ -58,7 +57,7 @@ export default function JoinScreen(props) {
             </button>
           </div>
           <div style={{ marginTop: '-10px' }}>
-            {inputMeetingIdErr && <div>input meeting id plz</div>}
+            {inputMeetingIdErr && <div>Input a Meeting ID Please</div>}
             <span style={{ marginBottom: '10px' }}>or</span>
             <div style={{ marginBottom: '10px' }}></div> {/* Added empty div for spacing */}
             <button className="button is-success" onClick={createMeetingToken} style={{ marginBottom: '10px' }}>

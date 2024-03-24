@@ -1,6 +1,7 @@
 import React, { useEffect, useMemo, useRef } from 'react'
 import { useParticipant } from '@videosdk.live/react-sdk'
 import ReactPlayer from 'react-player'
+import Controls from './Controls'
 
 export default function ParticipantView(props) {
   const micRef = useRef(null)
@@ -34,6 +35,7 @@ export default function ParticipantView(props) {
         Participant: {displayName} | Webcam: {webcamOn ? 'ON' : 'OFF'} | Mic: {micOn ? 'ON' : 'OFF'}
       </p>
       <audio ref={micRef} autoPlay playsInline muted={isLocal} />
+      <Controls webCamOn={webcamOn} micOn={micOn} />
       {webcamOn && (
         <ReactPlayer
           //
