@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { toast } from 'react-toastify'
 import { createMeeting, validateMeeting } from '../apis/videoAPI.js'
+const VIDEOSDK_TOKEN = process.env.REACT_APP_VIDEOSDK_TOKEN
 
 export default function JoinScreen(props) {
   const { getMeetingAndToken: setVidCallMeetingId } = props
@@ -8,27 +9,12 @@ export default function JoinScreen(props) {
   const [meetingId, setMeetingId] = useState(null)
   const [inputMeetingIdErr, setInputMeetingIdErr] = useState(false)
   const getMeetingAndToken = async id => {
-    console.log('meetingId', meetingId)
-    const newMeetingId = await createMeeting()
-    setMeetingId(newMeetingId)
-    setVidCallMeetingId(newMeetingId)
+    const meetingId = id == null ? await createMeeting({ token: VIDEOSDK_TOKEN }) : id
+    setMeetingId(meetingId)
+    setVidCallMeetingId(meetingId)
   }
 
-  // const onClick = async () => {
-  //   await getMeetingAndToken(meetingId)
-  //   console.log('join meeting button clicked')
-  // }
-
-  const joinMeetingToken = async () => {
-    if (meetingId != null) {
-      setInputMeetingIdErr(false)
-      await getMeetingAndToken(meetingId)
-    } else {
-      setInputMeetingIdErr(true)
-    }
-  }
-
-  const createMeetingToken = async () => {
+  const onClick = async () => {
     await getMeetingAndToken(meetingId)
     console.log('join meeting button clicked')
   }
@@ -38,7 +24,12 @@ export default function JoinScreen(props) {
       <div className="card-content">
         <div
           className="content"
-          style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }}
+          style={{
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
+            justifyContent: 'center',
+          }}
         >
           <div style={{ marginBottom: '10px' }}>
             <input
@@ -50,7 +41,7 @@ export default function JoinScreen(props) {
             />
             <button
               className="button is-primary"
-              onClick={joinMeetingToken}
+              onClick={onClick}
               style={{ marginRight: '10px', marginBottom: '10px' }}
             >
               Join
@@ -60,7 +51,11 @@ export default function JoinScreen(props) {
             {inputMeetingIdErr && <div>Input a Meeting ID Please</div>}
             <span style={{ marginBottom: '10px' }}>or</span>
             <div style={{ marginBottom: '10px' }}></div> {/* Added empty div for spacing */}
-            <button className="button is-success" onClick={createMeetingToken} style={{ marginBottom: '10px' }}>
+            <button
+              className="button is-success"
+              onClick={onClick}
+              style={{ marginBottom: '10px' }}
+            >
               Create Meeting
             </button>
           </div>

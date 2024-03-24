@@ -22,6 +22,7 @@ export default function MeetingView(props) {
       onMeetingLeave()
     }
   })
+  
   const joinMeeting = () => {
     setJoined('JOINING')
     join()
