@@ -42,7 +42,7 @@ function App() {
     const userTasks = await fetchTasks(user.uid)
     console.log('userTask is ', userTasks)
     setTasks(userTasks)
-    console.log("Tasks", tasks)
+    console.log('Tasks', tasks)
   }
 
   const handleAddTask = async () => {
@@ -69,27 +69,25 @@ function App() {
   }
 
   const handleUpdateCompleteness = async (taskId, newCompleteness) => {
-    console.log("The current completeness data", newCompleteness)
+    console.log('The current completeness data', newCompleteness)
     const updatedTasks = tasks.map(task => {
       if (task.id === taskId) {
         return { ...task, completed: newCompleteness }
       }
-      console.log("Task that is updated ", task)
+      console.log('Task that is updated ', task)
       return task
     })
     setTasks(updatedTasks)
   }
 
-
   const closeModal = () => {
-    setOpenTaskModal(false);
+    setOpenTaskModal(false)
   }
-
 
   return (
     <div className="App">
       <header className="App-header">
-        <Timer user ={user} openTaskModal={setOpenTaskModal}/>
+        <Timer user={user} openTaskModal={setOpenTaskModal} />
         <div className="auth-container">
           {!user ? (
             <SignIn />
@@ -105,12 +103,12 @@ function App() {
         </div>
       </header>
       <div className={`clock-container ${isClockMinimized ? 'minimized-clock' : ''}`}>
-        <AnalogClock /> 
+        <AnalogClock />
       </div>
       <div>
         {!user ? (
           <h2> Login to view your tasks</h2>
-        ) : ( openTaskModal ? 
+        ) : openTaskModal ? (
           openTaskModal && (
             <TaskView
               handleDeleteTask={handleDeleteTask}
@@ -122,7 +120,10 @@ function App() {
               tasks={tasks}
               closeModal={closeModal}
             />
-          ) : <></> )}
+          )
+        ) : (
+          <></>
+        )}
       </div>
       <VideoCall />
     </div>
