@@ -3,6 +3,7 @@ import React from 'react';
 import TaskItem from './TaskItem';
 
 function TaskList({ tasks, onDelete, onUpdateTask }) {
+  console.log(tasks)
   return (
     <ul>
       {tasks.map(task => (
