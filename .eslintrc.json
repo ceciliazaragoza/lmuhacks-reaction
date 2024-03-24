@@ -1,14 +1,7 @@
 {
-  "extends": [
-    "next/core-web-vitals",
-    "eslint:recommended",
-    "plugin:@typescript-eslint/recommended",
-    "plugin:prettier/recommended"
-  ],
-  "parser": "@typescript-eslint/parser",
-  "plugins": ["@typescript-eslint"],
+  "extends": ["eslint:recommended", "plugin:prettier/recommended"],
   "root": true,
-  "ignorePatterns": ["node_modules/*", "**/*.js", "supabase.*.types.ts"],
+  "ignorePatterns": ["node_modules/*", "**/*.js"],
   "rules": {
     "prettier/prettier": [
       "error",
