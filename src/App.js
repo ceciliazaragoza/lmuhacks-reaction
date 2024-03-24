@@ -68,8 +68,11 @@ function App() {
 
   return (
     <div className="App">
-      <header className="App-header">
+      <div className="sticky-header">
         <Timer />
+      </div>
+      <header className="App-header">
+        {/* <Timer /> */}
         <div className="auth-container">
           {!user ? (
             <SignIn />
